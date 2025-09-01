@@ -6,6 +6,7 @@ import cors from "cors";
 
 import { createServer } from "http";
 import { PORT } from "./src/common/constants/app.constant";
+import { appError } from "./src/common/app-error/app-error.error";
 
 
 // init app
@@ -29,7 +30,7 @@ const httpServer = createServer(app);
 // routing
 app.use("/api", rootRouter);
 
-// app.use(appError);
+app.use(appError);
 
 httpServer.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`
