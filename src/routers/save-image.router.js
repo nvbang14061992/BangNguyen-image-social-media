@@ -7,6 +7,8 @@ const saveImageRouter = express.Router();
 // Tạo route CRUD
 saveImageRouter.post('/',protect, saveImageController.create);
 saveImageRouter.get('/',protect, saveImageController.findAll);
+saveImageRouter.post('/toggle-save',protect, saveImageController.toggleSave);
+
 saveImageRouter.get('/:id', saveImageController.findOne);
 saveImageRouter.patch('/:id', saveImageController.update);
 saveImageRouter.delete('/:id', saveImageController.remove);
