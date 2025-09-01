@@ -1,4 +1,3 @@
-SELECT VERSION();
 
 -- database
 CREATE DATABASE IF NOT EXISTS image_social_media; 
@@ -35,7 +34,7 @@ CREATE TABLE Images (
     `pathToImage` VARCHAR(255) NOT NULL,
     `description` VARCHAR(500),
     `userId` INT,
-    `FOREIGN` KEY (`userId`) REFERENCES Users(`id`)
+    FOREIGN KEY (`userId`) REFERENCES Users(`id`),
 
     -- default
 	`deletedBy` INT NOT NULL DEFAULT 0,
@@ -52,7 +51,7 @@ CREATE TABLE Comments (
     `imageId` INT,
     `content` VARCHAR(1000) NOT NULL,
     FOREIGN KEY (`userId`) REFERENCES Users(`id`),
-    FOREIGN KEY (`imageId`) REFERENCES Images(`id`)
+    FOREIGN KEY (`imageId`) REFERENCES Images(`id`),
 
     -- default
 	`deletedBy` INT NOT NULL DEFAULT 0,
@@ -68,7 +67,7 @@ CREATE TABLE Saved_images (
     `imageId` INT,
     PRIMARY KEY (userId, imageId),
     FOREIGN KEY (`userId`) REFERENCES Users(`id`),
-    FOREIGN KEY (`imageId`) REFERENCES Images(`id`)
+    FOREIGN KEY (`imageId`) REFERENCES Images(`id`),
 
     -- default
 	`deletedBy` INT NOT NULL DEFAULT 0,
