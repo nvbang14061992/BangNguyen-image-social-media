@@ -26,9 +26,9 @@ sequenceDiagram
     participant DB as Database
 
     U->>F: Open home page
-    F->>B: GET /api/images/:id
-    B->>DB: Query by id
-    DB-->>B: Image with correct id
+    F->>B: GET /api/images/?filter={name: "strings in name"}
+    B->>DB: Query by image names containing filter string
+    DB-->>B: Images containing filter string
     B-->>F: JSON with image data
     F-->>U: Render images in UI
 ```

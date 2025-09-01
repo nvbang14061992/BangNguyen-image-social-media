@@ -26,3 +26,6 @@ lerna-debug.log*
 # prisma
 /src/generated/prisma
 /src/generated/prisma
+
+# images
+/public
