@@ -72,7 +72,19 @@ export const imageService = {
     },
 
    findOne: async function (req) {
-      return `This action returns a id: ${req.params.id} image`;
+        let imageId = req.params.id;
+        if (!imageId) throw new BadRequestException("Missing image id!!!");
+        imageId = +imageId > 0 ? +imageId : 1; // avoid return error, for user experience
+
+        const imageExist = prisma.images.findUnique({
+            where: {
+                id: imageId
+            }
+        })
+
+        if (!imageExist) throw new BadRequestException("Image not exist!!!")
+
+        return imageExist;
    },
 
    update: async function (req) {
