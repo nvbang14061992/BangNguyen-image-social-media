@@ -8,5 +8,6 @@ const detailImageRouter = express.Router();
 detailImageRouter.get('/save', protect, detailImageController.save);
 detailImageRouter.get('/comments', protect, detailImageController.comments);
 detailImageRouter.get('/image', protect, detailImageController.image);
+detailImageRouter.post('/comment', protect, detailImageController.addComment);
 
 export default detailImageRouter;

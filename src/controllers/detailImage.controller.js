@@ -8,6 +8,12 @@ export const detailImageController = {
       res.status(response.statusCode).json(response);
    },
 
+   addComment: async function (req, res, next) {
+      const result = await detailImageService.addComment(req);
+      const response = responseSuccess(result, `Get all comments to image successfully`);
+      res.status(response.statusCode).json(response);
+   },
+
    save: async function (req, res, next) {
       const result = await detailImageService.save(req);
       const response = responseSuccess(result, `Get save successfully`);

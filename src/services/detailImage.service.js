@@ -10,6 +10,29 @@ export const detailImageService = {
             imageId: +imageId
          }
       });
+
+      return comments;
+   },
+
+   addComment: async function (req) {
+      const imageId = req.query.id;
+      const userId = req.user.id;
+      const content = req.body.content;
+      if (!imageId) throw new BadRequestException("Missing image id!!!");
+      if (!content) throw new BadRequestException("Missing content!!!");
+      await prisma.comments.create({
+         data: {
+            imageId: +imageId,
+            userId: +userId,
+            content: content
+         }
+      });
+
+      const comments = await prisma.comments.findMany({
+         where: {
+            imageId: +imageId
+         }
+      });
       
       return comments;
    },
