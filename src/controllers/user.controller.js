@@ -3,27 +3,39 @@ import { userService } from "../services/user.service";
 
 
 export const userController = {
-   create: async function (req, res, next) {
-      const result = await userService.create(req);
-      const response = responseSuccess(result, `Create user successfully`);
-      res.status(response.statusCode).json(response);
-   },
-
-   findAll: async function (req, res, next) {
-      const result = await userService.findAll(req);
-      const response = responseSuccess(result, `Get all users successfully`);
-      res.status(response.statusCode).json(response);
-   },
-
-   findOne: async function (req, res, next) {
-      const result = await userService.findOne(req);
-      const response = responseSuccess(result, `Get user #${req.params.id} successfully`);
-      res.status(response.statusCode).json(response);
-   },
-
    update: async function (req, res, next) {
       const result = await userService.update(req);
-      const response = responseSuccess(result, `Update user #${req.params.id} successfully`);
+      const response = responseSuccess(result, `Updated user profile!!!`);
       res.status(response.statusCode).json(response);
-   }
+   },
+
+   getInfo: async function (req, res, next) {
+      const result = await userService.getInfo(req);
+      const response = responseSuccess(result, `Get user info successfully`);
+      res.status(response.statusCode).json(response);
+   },
+   
+   uploadAvatarLocal: async function (req, res, next) {
+      const result = await userService.uploadAvatarLocal(req);
+      const response = responseSuccess(result, `Get user info successfully`);
+      res.status(response.statusCode).json(response);
+   },
+
+   findImages: async function (req, res, next) {
+      const result = await userService.findImages(req);
+      const response = responseSuccess(result, `Get all posted images successfully`);
+      res.status(response.statusCode).json(response);
+   },
+
+   findSavedImages: async function (req, res, next) {
+      const result = await userService.findSavedImages(req);
+      const response = responseSuccess(result, `Get all saved images successfully`);
+      res.status(response.statusCode).json(response);
+   },
+
+   removeImage: async function (req, res, next) {
+      const result = await userService.removeImage(req);
+      const response = responseSuccess(result, `Remove image successfully`);
+      res.status(response.statusCode).json(response);
+   },
 };

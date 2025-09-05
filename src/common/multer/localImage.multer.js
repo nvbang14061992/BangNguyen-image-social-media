@@ -13,8 +13,8 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const extName = path.extname(file.originalname);
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, "local" + '-' + uniqueSuffix + extName)
+    cb(null, "image_local" + '-' + uniqueSuffix + extName)
   }
 })
 
-export const uploadLocal = multer({ storage: storage })
+export const uploadImageLocal = multer({ storage: storage })
