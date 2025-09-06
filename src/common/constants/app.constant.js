@@ -6,3 +6,5 @@ export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 export const REFRESH_TOKEN_EXPIRED_IN = process.env.REFRESH_TOKEN_EXPIRED_IN;
 export const PORT = process.env.PORT;
 export const NODE_ENV = process.env.NODE_ENV;
+export const WINDOWS_RATE_LIMITER = +process.env.WINDOWS_RATE_LIMITER;
+export const MAX_RATE_LIMITER = +process.env.MAX_RATE_LIMITER;

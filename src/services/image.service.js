@@ -2,95 +2,97 @@ import prisma from "../common/prisma/init.prisma";
 import { BadRequestException } from "../common/helpers/exception.helper";
 
 export const imageService = {
-    create: async function (req) {
-        const {name, description} = req.body;
-        if(!req.file) throw new BadRequestException("Upload file not found!");
-        
-        if(!name) throw new BadRequestException("Missing title for image");
+  create: async function (req) {
+    const { name, description } = req.body;
+    if (!req.file) throw new BadRequestException("Upload file not found!");
 
-        const user = req.user;
+    if (!name) throw new BadRequestException("Missing title for image");
 
-        await prisma.images.create({
-            data: {
-                pathToImage: req.file.filename,
-                name: name,
-                description: description,
-                userId: user.id
-            }
-        });
+    const user = req.user;
 
-        return true;
-    },
+    await prisma.images.create({
+      data: {
+        pathToImage: req.file.filename,
+        name: name,
+        description: description,
+        userId: user.id,
+      },
+    });
 
-    findAll: async function (req) {
-        let { page, pageSize, filters} = req.query;
-        page = +page > 0 ? +page : 1; // avoid return error, for user experience
-        pageSize = +pageSize > 0 ? +pageSize : 10;
-        filters = JSON.parse(filters || "{}") || {};
+    return true;
+  },
 
-        const index = (page - 1) * (+pageSize); // default pageSize is 3
-        
-        // process filters
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value === null || value === undefined || value === '') {
-                delete filters[key];
-                return;
-            }
+  findAll: async function (req) {
+    let { page, pageSize, filters } = req.query;
+    page = +page > 0 ? +page : 1; // avoid return error, for user experience
+    pageSize = +pageSize > 0 ? +pageSize : 10;
+    filters = JSON.parse(filters || "{}") || {};
 
-            if (typeof value === 'string') {
-                filters[key] = {
-                contains: value,
-            };
-            }
-        });
+    const index = (page - 1) * +pageSize; // default pageSize is 3
 
-        const imagesPromise =  prisma.images.findMany({
-            skip: index,
-            take: +pageSize,
+    // process filters
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === "") {
+        delete filters[key];
+        return;
+      }
 
-            where: filters,
-            orderBy: {
-                createdAt: 'desc'
-            }
-        });
-        
-        // counts total rows in table
-        const totalItemsPromise =  prisma.images.count();
-
-        const [images, totalItems] = await Promise.all([imagesPromise, totalItemsPromise])
-            
-
-        // calculate total pages
-        const totalPages = Math.ceil(totalItems / +pageSize);
-        return {
-            page,
-            pageSize,
-            totalItem: totalItems, 
-            totalPage: totalPages, 
-            items: images || []
+      if (typeof value === "string") {
+        filters[key] = {
+          contains: value,
         };
-    },
+      }
+    });
 
-   findOne: async function (req) {
-        const imageId = req.params.id;
-        if (!imageId) throw new BadRequestException("Missing image id!!!");
-        
-        const imageExist = prisma.images.findUnique({
-            where: {
-                id: imageId
-            }
-        })
+    const imagesPromise = prisma.images.findMany({
+      skip: index,
+      take: +pageSize,
 
-        if (!imageExist) throw new BadRequestException("Image not exist!!!")
+      where: filters,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-        return imageExist;
-   },
+    // counts total rows in table
+    const totalItemsPromise = prisma.images.count();
 
-   update: async function (req) {
-      return `This action updates a id: ${req.params.id} image`;
-   },
+    const [images, totalItems] = await Promise.all([
+      imagesPromise,
+      totalItemsPromise,
+    ]);
 
-   remove: async function (req) {
-      return `This action removes a id: ${req.params.id} image`;
-   },
+    // calculate total pages
+    const totalPages = Math.ceil(totalItems / +pageSize);
+    return {
+      page,
+      pageSize,
+      totalItem: totalItems,
+      totalPage: totalPages,
+      items: images || [],
+    };
+  },
+
+  findOne: async function (req) {
+    const imageId = req.params.id;
+    if (!imageId) throw new BadRequestException("Missing image id!!!");
+
+    const imageExist = prisma.images.findUnique({
+      where: {
+        id: +imageId,
+      },
+    });
+
+    if (!imageExist) throw new BadRequestException("Image not exist!!!");
+
+    return imageExist;
+  },
+
+  update: async function (req) {
+    return `This action updates a id: ${req.params.id} image`;
+  },
+
+  remove: async function (req) {
+    return `This action removes a id: ${req.params.id} image`;
+  },
 };
