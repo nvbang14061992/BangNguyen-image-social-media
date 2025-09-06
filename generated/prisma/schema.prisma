@@ -59,19 +59,22 @@ model Saved_images {
 }
 
 model Users {
-  id           Int            @id @default(autoincrement())
-  email        String         @unique(map: "email") @db.VarChar(255)
-  password     String?        @db.VarChar(255)
-  fullName     String?        @db.VarChar(255)
-  age          Int?
-  avatar_path  String?        @db.VarChar(255)
-  description  String?        @db.VarChar(500)
-  deletedBy    Int            @default(0)
-  isDeleted    Boolean        @default(false)
-  deletedAt    DateTime?      @db.Timestamp(0)
-  createdAt    DateTime       @default(now()) @db.Timestamp(0)
-  updatedAt    DateTime       @default(now()) @db.Timestamp(0)
-  Comments     Comments[]
-  Images       Images[]
-  Saved_images Saved_images[]
+  id                   Int            @id @default(autoincrement())
+  email                String         @unique(map: "email") @db.VarChar(255)
+  password             String?        @db.VarChar(255)
+  fullName             String?        @db.VarChar(255)
+  age                  Int?
+  avatar_path          String?        @db.VarChar(255)
+  description          String?        @db.VarChar(500)
+  deletedBy            Int            @default(0)
+  isDeleted            Boolean        @default(false)
+  deletedAt            DateTime?      @db.Timestamp(0)
+  createdAt            DateTime       @default(now()) @db.Timestamp(0)
+  updatedAt            DateTime       @default(now()) @db.Timestamp(0)
+  passwordChangedAt    DateTime?      @db.Timestamp(0)
+  passwordResetToken   String?        @db.VarChar(255)
+  passwordResetExpires DateTime?      @db.Timestamp(0)
+  Comments             Comments[]
+  Images               Images[]
+  Saved_images         Saved_images[]
 }

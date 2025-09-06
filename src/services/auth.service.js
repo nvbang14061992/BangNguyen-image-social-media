@@ -70,5 +70,5 @@ export const authService = {
 
         const tokens = tokenService.createTokens(user.id);
         return tokens;
-    },
+    }
 };

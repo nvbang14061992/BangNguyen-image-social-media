@@ -7,7 +7,7 @@ import cors from "cors";
 import { createServer } from "http";
 import { PORT } from "./src/common/constants/app.constant";
 import { appError } from "./src/common/app-error/app-error.error";
-
+import { rateLimiter } from "./src/common/middlewares/rateLimiter.middleware";
 
 // init app
 const app = express();
@@ -28,6 +28,7 @@ app.use(cors({
 const httpServer = createServer(app);
 
 // routing
+app.use("/api", rateLimiter);
 app.use("/api", rootRouter);
 
 app.use(appError);

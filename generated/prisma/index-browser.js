@@ -167,7 +167,10 @@ exports.Prisma.UsersScalarFieldEnum = {
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  passwordChangedAt: 'passwordChangedAt',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpires: 'passwordResetExpires'
 };
 
 exports.Prisma.SortOrder = {
@@ -195,7 +198,8 @@ exports.Prisma.UsersOrderByRelevanceFieldEnum = {
   password: 'password',
   fullName: 'fullName',
   avatar_path: 'avatar_path',
-  description: 'description'
+  description: 'description',
+  passwordResetToken: 'passwordResetToken'
 };
 
 

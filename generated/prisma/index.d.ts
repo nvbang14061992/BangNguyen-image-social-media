@@ -4383,6 +4383,9 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    passwordChangedAt: Date | null
+    passwordResetToken: string | null
+    passwordResetExpires: Date | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -4398,6 +4401,9 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    passwordChangedAt: Date | null
+    passwordResetToken: string | null
+    passwordResetExpires: Date | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -4413,6 +4419,9 @@ export namespace Prisma {
     deletedAt: number
     createdAt: number
     updatedAt: number
+    passwordChangedAt: number
+    passwordResetToken: number
+    passwordResetExpires: number
     _all: number
   }
 
@@ -4442,6 +4451,9 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    passwordChangedAt?: true
+    passwordResetToken?: true
+    passwordResetExpires?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -4457,6 +4469,9 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    passwordChangedAt?: true
+    passwordResetToken?: true
+    passwordResetExpires?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -4472,6 +4487,9 @@ export namespace Prisma {
     deletedAt?: true
     createdAt?: true
     updatedAt?: true
+    passwordChangedAt?: true
+    passwordResetToken?: true
+    passwordResetExpires?: true
     _all?: true
   }
 
@@ -4574,6 +4592,9 @@ export namespace Prisma {
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    passwordChangedAt: Date | null
+    passwordResetToken: string | null
+    passwordResetExpires: Date | null
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -4608,6 +4629,9 @@ export namespace Prisma {
     deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    passwordChangedAt?: boolean
+    passwordResetToken?: boolean
+    passwordResetExpires?: boolean
     Comments?: boolean | Users$CommentsArgs<ExtArgs>
     Images?: boolean | Users$ImagesArgs<ExtArgs>
     Saved_images?: boolean | Users$Saved_imagesArgs<ExtArgs>
@@ -4629,9 +4653,12 @@ export namespace Prisma {
     deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    passwordChangedAt?: boolean
+    passwordResetToken?: boolean
+    passwordResetExpires?: boolean
   }
 
-  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "fullName" | "age" | "avatar_path" | "description" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["users"]>
+  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "fullName" | "age" | "avatar_path" | "description" | "deletedBy" | "isDeleted" | "deletedAt" | "createdAt" | "updatedAt" | "passwordChangedAt" | "passwordResetToken" | "passwordResetExpires", ExtArgs["result"]["users"]>
   export type UsersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Comments?: boolean | Users$CommentsArgs<ExtArgs>
     Images?: boolean | Users$ImagesArgs<ExtArgs>
@@ -4659,6 +4686,9 @@ export namespace Prisma {
       deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      passwordChangedAt: Date | null
+      passwordResetToken: string | null
+      passwordResetExpires: Date | null
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -5043,6 +5073,9 @@ export namespace Prisma {
     readonly deletedAt: FieldRef<"Users", 'DateTime'>
     readonly createdAt: FieldRef<"Users", 'DateTime'>
     readonly updatedAt: FieldRef<"Users", 'DateTime'>
+    readonly passwordChangedAt: FieldRef<"Users", 'DateTime'>
+    readonly passwordResetToken: FieldRef<"Users", 'String'>
+    readonly passwordResetExpires: FieldRef<"Users", 'DateTime'>
   }
     
 
@@ -5546,7 +5579,10 @@ export namespace Prisma {
     isDeleted: 'isDeleted',
     deletedAt: 'deletedAt',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    passwordChangedAt: 'passwordChangedAt',
+    passwordResetToken: 'passwordResetToken',
+    passwordResetExpires: 'passwordResetExpires'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -5589,7 +5625,8 @@ export namespace Prisma {
     password: 'password',
     fullName: 'fullName',
     avatar_path: 'avatar_path',
-    description: 'description'
+    description: 'description',
+    passwordResetToken: 'passwordResetToken'
   };
 
   export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
@@ -5895,6 +5932,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"Users"> | Date | string | null
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
+    passwordChangedAt?: DateTimeNullableFilter<"Users"> | Date | string | null
+    passwordResetToken?: StringNullableFilter<"Users"> | string | null
+    passwordResetExpires?: DateTimeNullableFilter<"Users"> | Date | string | null
     Comments?: CommentsListRelationFilter
     Images?: ImagesListRelationFilter
     Saved_images?: Saved_imagesListRelationFilter
@@ -5913,6 +5953,9 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordChangedAt?: SortOrderInput | SortOrder
+    passwordResetToken?: SortOrderInput | SortOrder
+    passwordResetExpires?: SortOrderInput | SortOrder
     Comments?: CommentsOrderByRelationAggregateInput
     Images?: ImagesOrderByRelationAggregateInput
     Saved_images?: Saved_imagesOrderByRelationAggregateInput
@@ -5935,6 +5978,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"Users"> | Date | string | null
     createdAt?: DateTimeFilter<"Users"> | Date | string
     updatedAt?: DateTimeFilter<"Users"> | Date | string
+    passwordChangedAt?: DateTimeNullableFilter<"Users"> | Date | string | null
+    passwordResetToken?: StringNullableFilter<"Users"> | string | null
+    passwordResetExpires?: DateTimeNullableFilter<"Users"> | Date | string | null
     Comments?: CommentsListRelationFilter
     Images?: ImagesListRelationFilter
     Saved_images?: Saved_imagesListRelationFilter
@@ -5953,6 +5999,9 @@ export namespace Prisma {
     deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordChangedAt?: SortOrderInput | SortOrder
+    passwordResetToken?: SortOrderInput | SortOrder
+    passwordResetExpires?: SortOrderInput | SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -5976,6 +6025,9 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Users"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
+    passwordChangedAt?: DateTimeNullableWithAggregatesFilter<"Users"> | Date | string | null
+    passwordResetToken?: StringNullableWithAggregatesFilter<"Users"> | string | null
+    passwordResetExpires?: DateTimeNullableWithAggregatesFilter<"Users"> | Date | string | null
   }
 
   export type CommentsCreateInput = {
@@ -6232,6 +6284,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsCreateNestedManyWithoutUsersInput
     Images?: ImagesCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesCreateNestedManyWithoutUsersInput
@@ -6250,6 +6305,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsUncheckedCreateNestedManyWithoutUsersInput
     Images?: ImagesUncheckedCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesUncheckedCreateNestedManyWithoutUsersInput
@@ -6267,6 +6325,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUpdateManyWithoutUsersNestedInput
     Images?: ImagesUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUpdateManyWithoutUsersNestedInput
@@ -6285,6 +6346,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUncheckedUpdateManyWithoutUsersNestedInput
     Images?: ImagesUncheckedUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUncheckedUpdateManyWithoutUsersNestedInput
@@ -6303,6 +6367,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
   }
 
   export type UsersUpdateManyMutationInput = {
@@ -6317,6 +6384,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UsersUncheckedUpdateManyInput = {
@@ -6332,6 +6402,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6751,6 +6824,9 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordChangedAt?: SortOrder
+    passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
   }
 
   export type UsersAvgOrderByAggregateInput = {
@@ -6772,6 +6848,9 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordChangedAt?: SortOrder
+    passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
@@ -6787,6 +6866,9 @@ export namespace Prisma {
     deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    passwordChangedAt?: SortOrder
+    passwordResetToken?: SortOrder
+    passwordResetExpires?: SortOrder
   }
 
   export type UsersSumOrderByAggregateInput = {
@@ -7334,6 +7416,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Images?: ImagesCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesCreateNestedManyWithoutUsersInput
   }
@@ -7351,6 +7436,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Images?: ImagesUncheckedCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7415,6 +7503,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Images?: ImagesUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUpdateManyWithoutUsersNestedInput
   }
@@ -7432,6 +7523,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Images?: ImagesUncheckedUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -7517,6 +7611,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesCreateNestedManyWithoutUsersInput
   }
@@ -7534,6 +7631,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsUncheckedCreateNestedManyWithoutUsersInput
     Saved_images?: Saved_imagesUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7625,6 +7725,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUpdateManyWithoutUsersNestedInput
   }
@@ -7642,6 +7745,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUncheckedUpdateManyWithoutUsersNestedInput
     Saved_images?: Saved_imagesUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -7687,6 +7793,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsCreateNestedManyWithoutUsersInput
     Images?: ImagesCreateNestedManyWithoutUsersInput
   }
@@ -7704,6 +7813,9 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    passwordChangedAt?: Date | string | null
+    passwordResetToken?: string | null
+    passwordResetExpires?: Date | string | null
     Comments?: CommentsUncheckedCreateNestedManyWithoutUsersInput
     Images?: ImagesUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7768,6 +7880,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUpdateManyWithoutUsersNestedInput
     Images?: ImagesUpdateManyWithoutUsersNestedInput
   }
@@ -7785,6 +7900,9 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordChangedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    passwordResetToken?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordResetExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Comments?: CommentsUncheckedUpdateManyWithoutUsersNestedInput
     Images?: ImagesUncheckedUpdateManyWithoutUsersNestedInput
   }
