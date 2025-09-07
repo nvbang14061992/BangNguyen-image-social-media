@@ -98,7 +98,7 @@ npm run prisma
 
 ## 2.6 Test (manually)
 
-- You can use export of postman collection in [Add_export_of_Postman_collection]() for testing api.
+- You can use export of postman collection in [Add_export_of_Postman_collection](./tests/api-test/Bang-image-social-media.postman_collection.json) for testing api.
 - This export including some scripts and global variables for avoiding some rework of login, get tokens
 
 # 3. API description
@@ -737,6 +737,324 @@ This endpoint is used for posting a new comment from logged in user, and return 
 ```
 
 ## 3.5 user
+
+### 3.5.1 get user info
+
+#### endpoint:
+
+```api
+GET api/user/
+```
+
+This endpoint is used for getting user name and email
+
+#### Parameters
+
+```json
+None
+```
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+```json
+None
+```
+
+#### response
+
+**_example_**
+
+```json
+{
+  "status": "success",
+  "statusCode": 200,
+  "message": "Get user info successfully",
+  "data": {
+    "userName": null,
+    "email": "PeterSch@example.com"
+  }
+}
+```
+
+### 3.5.2 update user profile
+
+#### endpoint:
+
+```api
+PATCH api/user/
+```
+
+This endpoint is used for updatting user's profile inlcuding email, fullName, age, description. This does not need parameter `:id` because only logged in user can change his / her profile but not other profile(s).
+
+#### Parameters
+
+```json
+None
+```
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+**_example_**
+
+```json
+{
+  "fullName": "Peter schuz",
+  "age": 32
+}
+```
+
+#### response
+
+**_example_**
+
+```json
+{
+  "status": "success",
+  "statusCode": 200,
+  "message": "Updated user profile!!!",
+  "data": {
+    "id": 2,
+    "email": "PeterSch@example.com",
+    "fullName": "Peter schuz",
+    "age": 32,
+    "avatar_path": "avatar_local-1757096528333-881038385.jpg",
+    "description": null,
+    "deletedBy": 0,
+    "isDeleted": false,
+    "deletedAt": null,
+    "createdAt": "2025-09-01T14:40:16.000Z",
+    "updatedAt": "2025-09-07T14:27:54.000Z",
+    "passwordChangedAt": null,
+    "passwordResetToken": "07cec13007076b3c16982cbfccb2d2b6d50f71fa884b0616a7a3a00dca787074",
+    "passwordResetExpires": "2025-09-06T05:01:28.000Z"
+  }
+}
+```
+
+### 3.5.3 get user posted images
+
+#### endpoint:
+
+```api
+GET api/user/uploads
+```
+
+This endpoint is used for getting all images _uploaded_ by logged in user page. Frontend can use the public url to see the picture e.g. `localhost:3000/images/image_local-1757095923376-308307888.jpg`.
+
+#### Parameters
+
+```json
+None
+```
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+```json
+None
+```
+
+#### response
+
+**_example_**
+
+```json
+{
+    "status": "success",
+    "statusCode": 200,
+    "message": "Get all posted images successfully",
+    "data": [
+        {
+            "id": 12,
+            "name": "old image1",
+            "pathToImage": "images/image_local-1757095923376-308307888.jpg",
+            "description": "this is old image1",
+            "userId": 2,
+            "deletedBy": 0,
+            "isDeleted": false,
+            "deletedAt": null,
+            "createdAt": "2025-09-05T18:12:03.000Z",
+            "updatedAt": "2025-09-07T14:39:56.000Z"
+        },
+        {
+            "id": 13,
+            "name": "old image1",
+            "pathToImage": "images/image_local-1757095932943-144569712.jpg",
+            "description": "this is old image1",
+            "userId": 2,
+            "deletedBy": 0,
+            "isDeleted": false,
+            "deletedAt": null,
+            "createdAt": "2025-09-05T18:12:13.000Z",
+            "updatedAt": "2025-09-07T14:39:56.000Z"
+        },
+    ...
+  ]
+}
+```
+
+### 3.5.4 get user saved images
+
+#### endpoint:
+
+```api
+GET api/user/saves
+```
+
+This endpoint is used for getting all images _saved_ by logged in user page. Frontend can use the public url to see the picture e.g. `localhost:3000/images/image_local-1757095923376-308307888.jpg`.
+
+#### Parameters
+
+```json
+None
+```
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+```json
+None
+```
+
+#### response
+
+**_example_**
+
+```json
+{
+  "status": "success",
+  "statusCode": 200,
+  "message": "Get all saved images successfully",
+  "data": [
+    {
+      "id": 14,
+      "name": "old image1",
+      "pathToImage": "images/image_local-1757095934102-296187893.jpg",
+      "postedUserId": 2
+    }
+  ]
+}
+```
+
+### 3.5.5 remove an image
+
+#### endpoint:
+
+```api
+DELETE api/user/delete-image/:id
+```
+
+This endpoint is used for deleting an iamge in user page where he or she selects (click on) the image.
+
+#### Parameter
+
+**_Path_**
+| Parameter | Description | Example |
+| --------- | ----------- | ------- |
+| id | (int) id of the image | 13 |
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+```json
+None
+```
+
+#### response
+
+**_example_**
+
+```json
+None
+```
+
+### 3.5.6 upload avatar local
+
+#### endpoint:
+
+```api
+POST api/user/avatar/
+```
+
+This endpoint is used for user uploading an avatar image. This happen when user press upload button on update profile page. Frontend can take the image via url in response e.g. `localhost:3000/avatars/avatar_local-1757260624715-376072597.jpg` .
+
+#### Parameters
+
+```json
+None
+```
+
+#### header
+
+| Header        | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| Authorization | Bearer Token | use accessToken |
+
+#### body
+
+> [!TIP]
+>
+> - Use postman for uploading file easier.
+> - Use `form-data` to upload file
+
+| key   | value              | Description                          |
+| ----- | ------------------ | ------------------------------------ |
+| image | (file) upload file | select a file from you local machine |
+
+#### response
+
+**_example_**
+
+```json
+{
+  "status": "success",
+  "statusCode": 200,
+  "message": "Get user info successfully",
+  "data": {
+    "id": 2,
+    "email": "PeterSch@example.com",
+    "fullName": "Peter schuz",
+    "age": 32,
+    "avatar_path": "avatars/avatar_local-1757260624715-376072597.jpg",
+    "description": null,
+    "deletedBy": 0,
+    "isDeleted": false,
+    "deletedAt": null,
+    "createdAt": "2025-09-01T14:40:16.000Z",
+    "updatedAt": "2025-09-07T15:57:04.000Z",
+    "passwordChangedAt": null,
+    "passwordResetToken": "07cec13007076b3c16982cbfccb2d2b6d50f71fa884b0616a7a3a00dca787074",
+    "passwordResetExpires": "2025-09-06T05:01:28.000Z"
+  }
+}
+```
 
 # 4. Security testing
 

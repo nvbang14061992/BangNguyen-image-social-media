@@ -10,9 +10,11 @@ export const imageService = {
 
     const user = req.user;
 
+    const pathToImage = "images/" + req.file.filename;
+
     await prisma.images.create({
       data: {
-        pathToImage: req.file.filename,
+        pathToImage: pathToImage,
         name: name,
         description: description,
         userId: user.id,

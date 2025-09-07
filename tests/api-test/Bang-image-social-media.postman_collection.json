@@ -1,0 +1,810 @@
+{
+	"info": {
+		"_postman_id": "45a24f91-0b2d-4735-b1be-d5b17fe27191",
+		"name": "Bang-image-social-media",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45698909",
+		"_collection_link": "https://www.postman.com/bang-4405084/workspace/node-51/collection/45698909-45a24f91-0b2d-4735-b1be-d5b17fe27191?action=share&source=collection_link&creator=45698909"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Peter Schuze\",\r\n    \"email\": \"PeterSch@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/register",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log in - cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json();\r",
+									"\r",
+									"let rawCookie = pm.cookies.get(\"authTokens\");\r",
+									"\r",
+									"if (rawCookie) {\r",
+									"    try {\r",
+									"        // Parse the JSON stored in the cookie\r",
+									"        let tokens = JSON.parse(rawCookie);\r",
+									"\r",
+									"        // Set tokens as global variables\r",
+									"        pm.globals.set(\"accessToken\", tokens.accessToken);\r",
+									"        pm.globals.set(\"refreshToken\", tokens.refreshToken);\r",
+									"\r",
+									"        console.log(\"Tokens extracted and stored globally:\", tokens);\r",
+									"    } catch (e) {\r",
+									"        console.error(\"Failed to parse token cookie:\", e);\r",
+									"    }\r",
+									"} else {\r",
+									"    console.warn(\"authTokens cookie not found\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"PeterSch@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "log in - sql attack",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json();\r",
+									"\r",
+									"let rawCookie = pm.cookies.get(\"authTokens\");\r",
+									"\r",
+									"if (rawCookie) {\r",
+									"    try {\r",
+									"        // Parse the JSON stored in the cookie\r",
+									"        let tokens = JSON.parse(rawCookie);\r",
+									"\r",
+									"        // Set tokens as global variables\r",
+									"        pm.globals.set(\"accessToken\", tokens.accessToken);\r",
+									"        pm.globals.set(\"refreshToken\", tokens.refreshToken);\r",
+									"\r",
+									"        console.log(\"Tokens extracted and stored globally:\", tokens);\r",
+									"    } catch (e) {\r",
+									"        console.error(\"Failed to parse token cookie:\", e);\r",
+									"    }\r",
+									"} else {\r",
+									"    console.warn(\"authTokens cookie not found\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"' OR 1=1 --\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/login",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refesh token - cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json();\r",
+									"\r",
+									"let rawCookie = pm.cookies.get(\"authTokens\");\r",
+									"\r",
+									"if (rawCookie) {\r",
+									"    try {\r",
+									"        // Parse the JSON stored in the cookie\r",
+									"        let tokens = JSON.parse(rawCookie);\r",
+									"\r",
+									"        // Set tokens as global variables\r",
+									"        pm.globals.set(\"accessToken\", tokens.accessToken);\r",
+									"        pm.globals.set(\"refreshToken\", tokens.refreshToken);\r",
+									"\r",
+									"        console.log(\"Tokens extracted and stored globally:\", tokens);\r",
+									"    } catch (e) {\r",
+									"        console.error(\"Failed to parse token cookie:\", e);\r",
+									"    }\r",
+									"} else {\r",
+									"    console.warn(\"authTokens cookie not found\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessToken\": \"{{accessToken}}\",\r\n    \"refreshToken\": \"{{refreshToken}}\"  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authUrl}}/refesh-token",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"refesh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "image",
+			"item": [
+				{
+					"name": "get images",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{imageUrl}}/?pageSize=4&filters={\"description\": \"1\"}",
+							"host": [
+								"{{imageUrl}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "4"
+								},
+								{
+									"key": "filters",
+									"value": "{\"name\": \"ol\"}",
+									"disabled": true
+								},
+								{
+									"key": "filters",
+									"value": "{\"description\": \"1\"}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{imageUrl}}/:id",
+							"host": [
+								"{{imageUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/WorkSpace/spotify_architecture.jpg"
+								},
+								{
+									"key": "name",
+									"value": "old image1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this is old image1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{imageUrl}}/",
+							"host": [
+								"{{imageUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "save-image",
+			"item": [
+				{
+					"name": "save an image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageId\": 14\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saveImage}}/toggle-save",
+							"host": [
+								"{{saveImage}}"
+							],
+							"path": [
+								"toggle-save"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "detail image",
+			"item": [
+				{
+					"name": "get image and posted user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{detailImageUrl}}/image/?id=14",
+							"host": [
+								"{{detailImageUrl}}"
+							],
+							"path": [
+								"image",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get save info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{detailImageUrl}}/save/?id=14",
+							"host": [
+								"{{detailImageUrl}}"
+							],
+							"path": [
+								"save",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all comments for image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{detailImageUrl}}/comments/?id=14",
+							"host": [
+								"{{detailImageUrl}}"
+							],
+							"path": [
+								"comments",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment for image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"This is comment from PeterSch@example.com again 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{detailImageUrl}}/comment/?id=14",
+							"host": [
+								"{{detailImageUrl}}"
+							],
+							"path": [
+								"comment",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get user info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Peter schuz\",\r\n    \"age\": 32\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userUrl}}/profile",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user posted images",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/uploads",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user saved images",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/saves",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"saves"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove an image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{userUrl}}/delete-image/:id",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"delete-image",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload avatar local",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Omega-Symbol.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{userUrl}}/avatar-local",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"avatar-local"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "authUrl",
+			"value": ""
+		},
+		{
+			"key": "imageUrl",
+			"value": ""
+		},
+		{
+			"key": "saveImage",
+			"value": ""
+		},
+		{
+			"key": "detailImageUrl",
+			"value": ""
+		},
+		{
+			"key": "userUrl",
+			"value": ""
+		}
+	]
+}
