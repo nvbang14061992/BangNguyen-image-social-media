@@ -2,32 +2,32 @@
 
 The application for upload, find, and manage images
 
-# 1. Sequence diagrams
+# 1. Sequence diagrams 🗺️
 
 - All sequence diagrams for this application are listed in [diagrams](./Document/diagrams/diagram.md)
 
-# 2. Set up
+# 2. Set up 🧑‍🔧
 
-## 2.1 Resource requried
+## 2.1 Resource requried 💻
 
 - Docker and mysql image
 - Visual studio code
 - At least 500 MB disk for image storage
 
-## 2.2 Database info
+## 2.2 Database info 🧳
 
 ### 2.2.1 Technology
 
-- This app uses mysql database containerized in docker image with port `3307:3306`. port `3307` is recommended, you can change `3307` to other port in property `DATABASE_URL` of the `.env` file.
+- This app uses mysql database containerized in docker image with port `3307:3306`. The port `3307` is recommended, you can change `3307` to other port in property `DATABASE_URL` of the `.env` file.
 - ORM for this app is prisma, please check the dependencies to check the version of that [dependency](package.json)
 
 ### 2.2.2 Approach
 
-- Database first is also the way this app established, the tables were created before app models.
+- Database first is the way this app established, tables are created before app models.
 
 - Tables for this app are created by [db.sql](./db/db.sql)
 
-## 2.3 .env
+## 2.3 .env 🪙
 
 ```properties
 DATABASE_URL=mysql://YourUserName:DataBasePassword@127.0.0.1:3307/YourDataBaseName
@@ -41,15 +41,15 @@ MAX_RATE_LIMITER=100
 
 > [!NOTE]
 >
-> - `YourDataBaseName` MUST match the creation in the [db.sql](./db/db.sql)
+> - `YourDataBaseName` MUST match the created one in the [db.sql](./db/db.sql)
 
 > - `ACCESS_TOKEN_EXPIRED_IN` and `REFRESH_TOKEN_EXPIRED_IN` can be `1m` or `1h`, etc. but `1d` is recommend for testing purpose.
 
-> - `WINDOWS_RATE_LIMITER` is the liimt windows for get access to all api again, it is in minisecond, you can input just 3000 for testing.
+> - `WINDOWS_RATE_LIMITER` is the limit windows for get access to all protected apis again, it is in minisecond, you can input just 3000 for testing.
 
-> - `MAX_RATE_LIMITER` is number of requests that you can send, it exceeding, you can only send more request after WINDOWS_RATE_LIMITER (ms).
+> - `MAX_RATE_LIMITER` is number of requests that you can send, if the number of api calling exceeds this value, you can only send more request(s) after WINDOWS_RATE_LIMITER (ms).
 
-## 2.4. Docker setup
+## 2.4. Docker setup 🐳
 
 - Mysql image:
 
@@ -57,7 +57,10 @@ MAX_RATE_LIMITER=100
 docker run --name mysql-image-name -e MYSQL_ROOT_PASSWORD=YourDataBasePassword -d -p 3307:3306 mysql
 ```
 
-## 2.5 BackEnd app
+> [!NOTE]
+> Change the password of this command to your expected password, and keep it secret, you don't want to loose it 😊.
+
+## 2.5 BackEnd app 🚀
 
 ### 2.5.1 General set up
 
@@ -101,15 +104,17 @@ npm run prisma
 - You can use export of postman collection in [Add_export_of_Postman_collection](./tests/api-test/Bang-image-social-media.postman_collection.json) for testing api.
 - This export including some scripts and global variables for avoiding some rework of login, get tokens
 
-# 3. API description
+# 3. API description 📜
 
-## Check server
+## Check server 👋
 
 #### endpoint
 
 ```api
 GET api/
 ```
+
+For example: `localhost:3000/api`
 
 #### Parameters
 
@@ -131,9 +136,9 @@ None
 "Hello From Bang Image Social Media!!!"
 ```
 
-## 3.1 Auth
+## 3.1 Authentication 👮
 
-### 3.1.1 - register
+### 3.1.1 - Register
 
 #### endpoint
 
@@ -155,8 +160,14 @@ None
 
 #### body
 
+**_example_**
+
 ```json
-None
+{
+  "full_name": "Peter Schuze",
+  "email": "PeterSch@example.com",
+  "password": "passABC123#@"
+}
 ```
 
 ### 3.1.2 - login
@@ -167,11 +178,7 @@ None
 POST api/auth/login
 ```
 
-for example
-
-```api
-localhost:3000/api/auth/login
-```
+The `accessToken` and `refeshToken` are sent back to frontend not in body, but in the header where cookie storing and HTTP only activated.
 
 #### Parameters
 
@@ -213,7 +220,7 @@ None
 | authTokens | %7B%22accessToken%22%3... | 127.0.0.1 | / | Session | true | false |
 
 > [!NOTE]
-> If you use postman script for retrive `accessToken` and `refreshToken` you can use below script
+> If you use postman script for retrive `accessToken` and `refreshToken`, you can use below script:
 
 ```javascript
 const data = pm.response.json();
@@ -282,9 +289,9 @@ None
 }
 ```
 
-## 3.2 image
+## 3.2 Image 🖼️
 
-### 3.2.1 get images
+### 3.2.1 Get all images
 
 #### endpoint:
 
@@ -363,7 +370,7 @@ None
 > [!NOTE]
 > Make sure you put the `json` format for `filter` parameter.
 
-### 3.2.2 get one image
+### 3.2.2 Get one image
 
 #### endpoint:
 
@@ -418,7 +425,7 @@ None
 }
 ```
 
-### 3.2.3 create images
+### 3.2.3 Create an image
 
 #### endpoint:
 
@@ -453,9 +460,9 @@ None
 | name        | (string) old image1         | input name for the image             |
 | description | (string) this is old image1 | input description for the image      |
 
-## 3.3 save-image
+## 3.3 Save-image 🩷
 
-### 3.3.1 save an image
+### 3.3.1 Save an image
 
 #### endpoint:
 
@@ -463,7 +470,7 @@ None
 POST api/save-image/toggle-save
 ```
 
-This endpoint is used for user to save an image in detail view page of an image. It work the same way as like button on facebook where user will toggle the save button to change state of the image between `saved` or `unsave`.
+This endpoint is used for user to save an image in detail view page of an image. It works the same way as like button on facebook where user will toggle the save button to change state of the image between `saved` or `unsave`.
 
 #### Parameters
 
@@ -478,8 +485,6 @@ None
 | Authorization | Bearer Token | use accessToken |
 
 #### body
-
-**_postman script_**
 
 ```json
 {
@@ -508,7 +513,7 @@ None
 }
 ```
 
-## 3.4 detail image
+## 3.4 Detail image 🎴
 
 These api are used for detail view page for an image where user can see:
 
@@ -519,7 +524,7 @@ These api are used for detail view page for an image where user can see:
 - Create a comment for this image
 - Toggle save (sent via `save-image` api) in [3.3.1](#331-save-an-image)
 
-### 3.4.1 get image and posted user
+### 3.4.1 Get image and posted user
 
 #### endpoint:
 
@@ -573,7 +578,7 @@ None
 }
 ```
 
-### 3.4.2 get save info
+### 3.4.2 Get save info
 
 #### endpoint:
 
@@ -581,7 +586,7 @@ None
 GET api/detail-image/save
 ```
 
-This endpoint is used for get if selected image is saved, `data` field in response will return `true` if this image is saved or `false` this image is not saved or not found (this will not happen because the front end will send exactly the image id via selecting action from user).
+This endpoint is used for showing if selected image was saved, `data` field in response will return `true` if this image is saved or `false` this image is not saved or not found (this will not happen because the front end will send exactly the image id via selecting action from user).
 
 #### Parameters
 
@@ -615,7 +620,7 @@ None
 }
 ```
 
-### 3.4.3 get all comments for image
+### 3.4.3 Get all comments for image
 
 #### endpoint:
 
@@ -669,12 +674,12 @@ None
 }
 ```
 
-### 3.4.4 add comment for image
+### 3.4.4 Add comment for image
 
 #### endpoint:
 
 ```api
-POST api/detail-image/comments
+POST api/detail-image/comment/:id
 ```
 
 This endpoint is used for posting a new comment from logged in user, and return back all comments and commented user ids, this helps frontend voiding recall [get comments](#343-get-all-comments-for-image)
@@ -736,9 +741,9 @@ This endpoint is used for posting a new comment from logged in user, and return 
 }
 ```
 
-## 3.5 user
+## 3.5 User 🙂
 
-### 3.5.1 get user info
+### 3.5.1 Get user info
 
 #### endpoint:
 
@@ -746,7 +751,7 @@ This endpoint is used for posting a new comment from logged in user, and return 
 GET api/user/
 ```
 
-This endpoint is used for getting user name and email
+This endpoint is used for getting user name and email.
 
 #### Parameters
 
@@ -782,7 +787,7 @@ None
 }
 ```
 
-### 3.5.2 update user profile
+### 3.5.2 Update user profile
 
 #### endpoint:
 
@@ -843,7 +848,7 @@ None
 }
 ```
 
-### 3.5.3 get user posted images
+### 3.5.3 Get user posted images
 
 #### endpoint:
 
@@ -910,7 +915,7 @@ None
 }
 ```
 
-### 3.5.4 get user saved images
+### 3.5.4 Get user saved images
 
 #### endpoint:
 
@@ -958,7 +963,7 @@ None
 }
 ```
 
-### 3.5.5 remove an image
+### 3.5.5 Remove an image
 
 #### endpoint:
 
@@ -995,12 +1000,12 @@ None
 None
 ```
 
-### 3.5.6 upload avatar local
+### 3.5.6 Upload avatar local
 
 #### endpoint:
 
 ```api
-POST api/user/avatar/
+POST api/user/avatar-local
 ```
 
 This endpoint is used for user uploading an avatar image. This happen when user press upload button on update profile page. Frontend can take the image via url in response e.g. `localhost:3000/avatars/avatar_local-1757260624715-376072597.jpg` .
@@ -1062,6 +1067,6 @@ None
 
 # 4.1 XSS-Protection
 
-The server api is protected from XSS to run javascript to get headers information, we can use check server api and postman for seeing the header X-XSS-Protection
+The server api is protected from XSS to run javascript to get headers information by `helmetjs`. We can use [check server api](#check-server-) and postman for seeing the resposne header X-XSS-Protection
 
 <img src="./Document//images/HTTP_header_protection.png" alt="drawing" width="1000"/>
