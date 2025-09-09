@@ -860,9 +860,12 @@ This endpoint is used for getting all images _uploaded_ by logged in user page. 
 
 #### Parameters
 
-```json
-None
-```
+**_Query_**
+| Parameter | Description | Example |
+| --------- | ---------------------------------------- | -------------------------------------- |
+| page | (int) page number (for pagination) | 2 |
+| pageSize | (int) number of items (images) in a page | 4 |
+| filter | (json) filter to apply for frontend | {"name": "ol"} or {"description": "1"} |
 
 #### header
 
@@ -882,36 +885,41 @@ None
 
 ```json
 {
-    "status": "success",
-    "statusCode": 200,
-    "message": "Get all posted images successfully",
-    "data": [
-        {
-            "id": 12,
-            "name": "old image1",
-            "pathToImage": "images/image_local-1757095923376-308307888.jpg",
-            "description": "this is old image1",
-            "userId": 2,
-            "deletedBy": 0,
-            "isDeleted": false,
-            "deletedAt": null,
-            "createdAt": "2025-09-05T18:12:03.000Z",
-            "updatedAt": "2025-09-07T14:39:56.000Z"
-        },
-        {
-            "id": 13,
-            "name": "old image1",
-            "pathToImage": "images/image_local-1757095932943-144569712.jpg",
-            "description": "this is old image1",
-            "userId": 2,
-            "deletedBy": 0,
-            "isDeleted": false,
-            "deletedAt": null,
-            "createdAt": "2025-09-05T18:12:13.000Z",
-            "updatedAt": "2025-09-07T14:39:56.000Z"
-        },
-    ...
-  ]
+  "status": "success",
+  "statusCode": 200,
+  "message": "Get all posted images successfully",
+  "data": {
+    "page": 1,
+    "pageSize": 2,
+    "totalItem": 5,
+    "totalPage": 3,
+    "items": [
+      {
+        "id": 16,
+        "name": "old image1",
+        "pathToImage": "images/image_local-1757255826569-700919710.jpg",
+        "description": "this is old image1",
+        "userId": 2,
+        "deletedBy": 0,
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2025-09-07T14:37:07.000Z",
+        "updatedAt": "2025-09-07T14:39:56.000Z"
+      },
+      {
+        "id": 15,
+        "name": "old image1",
+        "pathToImage": "images/image_local-1757170831791-552326431.jpg",
+        "description": "this is old image1",
+        "userId": 2,
+        "deletedBy": 0,
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2025-09-06T15:00:32.000Z",
+        "updatedAt": "2025-09-07T14:39:56.000Z"
+      }
+    ]
+  }
 }
 ```
 
@@ -927,9 +935,12 @@ This endpoint is used for getting all images _saved_ by logged in user page. Fro
 
 #### Parameters
 
-```json
-None
-```
+**_Query_**
+| Parameter | Description | Example |
+| --------- | ---------------------------------------- | -------------------------------------- |
+| page | (int) page number (for pagination) | 2 |
+| pageSize | (int) number of items (images) in a page | 4 |
+| filter | (json) filter to apply for frontend | {"name": "ol"} or {"description": "1"} |
 
 #### header
 
@@ -952,14 +963,26 @@ None
   "status": "success",
   "statusCode": 200,
   "message": "Get all saved images successfully",
-  "data": [
-    {
-      "id": 14,
-      "name": "old image1",
-      "pathToImage": "images/image_local-1757095934102-296187893.jpg",
-      "postedUserId": 2
-    }
-  ]
+  "data": {
+    "page": 1,
+    "pageSize": 2,
+    "totalItem": 4,
+    "totalPage": 2,
+    "items": [
+      {
+        "id": 16,
+        "name": "old image1",
+        "pathToImage": "images/images/image_local-1757255826569-700919710.jpg",
+        "postedUserId": 2
+      },
+      {
+        "id": 15,
+        "name": "old image1",
+        "pathToImage": "images/images/image_local-1757170831791-552326431.jpg",
+        "postedUserId": 2
+      }
+    ]
+  }
 }
 ```
 

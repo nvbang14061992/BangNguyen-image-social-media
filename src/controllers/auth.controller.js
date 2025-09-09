@@ -13,19 +13,19 @@ const sendTokens = (res, resData, tokens) => {
 export const authController = {
   register: async function (req, res, next) {
     const result = await authService.register(req);
-    const response = responseSuccess(result, `Create auth successfully`);
+    const response = responseSuccess(result, `Register successfully`);
     res.status(response.statusCode).json(response);
   },
 
   login: async function (req, res, next) {
     const result = await authService.login(req);
-    const response = responseSuccess(true, `Get tokens successfully`);
+    const response = responseSuccess(true, `Login successfully!`);
     sendTokens(res, response, result);
   },
 
   refeshToken: async function (req, res, next) {
     const result = await authService.refeshToken(req);
-    const response = responseSuccess(true, `Refesh tokens successfully`);
+    const response = responseSuccess(true, `Refesh tokens successfully!`);
     sendTokens(res, response, result);
   },
 };

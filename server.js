@@ -39,9 +39,11 @@ app.use("/api", rateLimiter);
 app.get("/api", (req, res) => {
   res.json("Hello From Bang Image Social Media!!!");
 });
+
+//swagger
+// app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // api
 app.use("/api", rootRouter);
-
 app.use(appError);
 
 httpServer.listen(PORT, () => {

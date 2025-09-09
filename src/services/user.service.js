@@ -109,33 +109,131 @@ export const userService = {
 
   findImages: async function (req) {
     const userId = req.user.id;
-    const images = await prisma.images.findMany({
-      where: { userId: userId },
+    let { page, pageSize, filters } = req.query;
+    page = +page > 0 ? +page : 1; // avoid return error, for user experience
+    pageSize = +pageSize > 0 ? +pageSize : 10;
+    filters = JSON.parse(filters || "{}") || {};
+
+    const index = (page - 1) * +pageSize; // default pageSize is 3
+
+    // process filters
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === "") {
+        delete filters[key];
+        return;
+      }
+
+      if (typeof value === "string") {
+        filters[key] = {
+          contains: value,
+        };
+      }
     });
 
-    return images;
+    const imagesPromise = prisma.images.findMany({
+      skip: index,
+      take: +pageSize,
+
+      where: {
+        userId: userId,
+        ...filters,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    // counts total rows in table
+    const totalItemsPromise = prisma.images.count();
+
+    const [images, totalItems] = await Promise.all([
+      imagesPromise,
+      totalItemsPromise,
+    ]);
+
+    // calculate total pages
+    const totalPages = Math.ceil(totalItems / +pageSize);
+    return {
+      page,
+      pageSize,
+      totalItem: totalItems,
+      totalPage: totalPages,
+      items: images || [],
+    };
   },
 
   findSavedImages: async function (req) {
     const userId = req.user.id;
-    const savedImages = await prisma.saved_images.findMany({
+    let { page, pageSize, filters } = req.query;
+    page = +page > 0 ? +page : 1; // avoid return error, for user experience
+    pageSize = +pageSize > 0 ? +pageSize : 10;
+    filters = JSON.parse(filters || "{}") || {};
+
+    const index = (page - 1) * +pageSize; // default pageSize is 3
+
+    // process filters
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === "") {
+        delete filters[key];
+        return;
+      }
+
+      if (typeof value === "string") {
+        filters[key] = {
+          contains: value,
+        };
+      }
+    });
+
+    const savedImagesPromise = prisma.saved_images.findMany({
+      skip: index,
+      take: +pageSize,
       where: { userId: userId },
-      include: {
-        Images: true,
-      },
+      // include: {
+      //   Images: true,
+      // },
       orderBy: {
         createdAt: "desc", // optional: most recently saved first
       },
     });
 
-    const imagesOnly = savedImages.map((entry) => {
+    // counts total rows in table
+    const totalItemsPromise = prisma.saved_images.count({
+      where: { userId: userId },
+    });
+
+    const [savedImages, totalItems] = await Promise.all([
+      savedImagesPromise,
+      totalItemsPromise,
+    ]);
+
+    const images = await prisma.images.findMany({
+      where: {
+        id: { in: savedImages.map((entry) => entry.imageId) },
+        ...filters,
+      },
+    });
+
+    console.log(images);
+    const imagesOnly = images.map((entry) => {
+      const { id, name, pathToImage, description, userId } = entry;
       return {
-        id: entry.Images.id,
-        name: entry.Images.name,
-        pathToImage: `images/${entry.Images.pathToImage}`,
-        postedUserId: entry.Images.userId,
+        id,
+        name,
+        pathToImage: `images/${pathToImage}`,
+        description,
+        postedUserId: userId,
       };
     });
-    return imagesOnly;
+
+    // calculate total pages
+    const totalPages = Math.ceil(totalItems / +pageSize);
+    return {
+      page,
+      pageSize,
+      totalItem: totalItems,
+      totalPage: totalPages,
+      items: imagesOnly || [],
+    };
   },
 };
