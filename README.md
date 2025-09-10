@@ -1093,3 +1093,8 @@ None
 The server api is protected from XSS to run javascript to get headers information by `helmetjs`. We can use [check server api](#check-server-) and postman for seeing the resposne header X-XSS-Protection
 
 <img src="./Document//images/HTTP_header_protection.png" alt="drawing" width="1000"/>
+
+# 5. Swagger
+
+> [!TIP]
+> As mentioned, except the authentication endpoints, all other endpoints are protect via `tokens`. However, the `tokens` are sent via cookies, thus you can not see them also on swagger response, thus you need to workaround by using postman to login and see `accessToken` via cookie on postman.
