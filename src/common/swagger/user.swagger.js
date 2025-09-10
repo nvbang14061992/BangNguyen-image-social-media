@@ -72,7 +72,7 @@ export const userSwagger = {
   "/user/profile/": {
     patch: {
       tags: ["User"],
-      summary: "get user saved images",
+      summary: "update user profile",
       security: [{ bearerAuth: [] }],
       requestBody: {
         content: {
@@ -88,6 +88,10 @@ export const userSwagger = {
                   type: "number",
                   example: "18",
                 },
+                description: {
+                  type: "string",
+                  example: "New description",
+                },
               },
             },
           },
@@ -95,7 +99,55 @@ export const userSwagger = {
       },
       responses: {
         200: {
-          description: "Get all saved images successfully",
+          description: "Updated user profile successfully",
+        },
+      },
+    },
+  },
+  "/user/avatar-local/": {
+    post: {
+      tags: ["User"],
+      summary: "update user avatar",
+      security: [{ bearerAuth: [] }],
+      requestBody: {
+        content: {
+          "multipart/form-data": {
+            schema: {
+              type: "object",
+              required: ["image"],
+              properties: {
+                image: {
+                  type: "string",
+                  format: "binary",
+                },
+              },
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Updated user profile successfully",
+        },
+      },
+    },
+  },
+  "/user/delete-image/:id": {
+    delete: {
+      tags: ["User"],
+      summary: "delete an posted image",
+      security: [{ bearerAuth: [] }],
+      parameters: [
+        {
+          name: "id",
+          in: "path",
+          description: "image id",
+          required: true,
+        },
+      ],
+      responses: {
+        200: {
+          description: "Updated avatar successfully",
         },
       },
     },

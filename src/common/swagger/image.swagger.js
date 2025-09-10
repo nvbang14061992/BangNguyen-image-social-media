@@ -72,7 +72,7 @@ export const imageSwagger = {
         {
           name: "id",
           in: "path",
-          description: "id image",
+          description: "image id",
           required: true,
         },
       ],
