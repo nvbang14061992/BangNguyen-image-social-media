@@ -69,4 +69,35 @@ export const userSwagger = {
       },
     },
   },
+  "/user/profile/": {
+    patch: {
+      tags: ["User"],
+      summary: "get user saved images",
+      security: [{ bearerAuth: [] }],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                fullName: {
+                  type: "string",
+                  example: "New Name",
+                },
+                age: {
+                  type: "number",
+                  example: "18",
+                },
+              },
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Get all saved images successfully",
+        },
+      },
+    },
+  },
 };

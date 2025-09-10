@@ -7,6 +7,24 @@ export const userService = {
   update: async function (req) {
     const updateData = req.body;
     const userId = req.user.id;
+    if (Object.keys(updateData).length === 0) {
+      return null;
+    }
+
+    // return error if email, password, avatar_path, deletedBy, isdeleted, deletedAt, createdAt and updatedAt are being updated
+    if (
+      updateData.email ||
+      updateData.password ||
+      updateData.avatar_path ||
+      updateData.deletedBy ||
+      updateData.isDeleted ||
+      updateData.deletedAt ||
+      updateData.createdAt ||
+      updateData.updatedAt
+    ) {
+      throw new BadRequestException("Permission denied!");
+    }
+
     const newInfo = await prisma.users.update({
       where: { id: userId },
       data: updateData,
