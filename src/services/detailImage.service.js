@@ -83,7 +83,7 @@ export const detailImageService = {
 
     if (!imageExist) throw new BadRequestException("Image not exist!!!");
 
-    imageExist.pathToImage = `images/${imageExist.pathToImage}`;
+    imageExist.pathToImage = `${imageExist.pathToImage}`;
 
     return imageExist; //return image url, user posted
   },
