@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"full_name\": \"Peter Schuze\",\r\n    \"email\": \"PeterSch@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
+							"raw": "{\r\n    \"full_name\": \"TestUser1\",\r\n    \"email\": \"TestUser1@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,7 +74,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"PeterSch@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
+							"raw": "{\r\n    \"email\": \"TestUser1@example.com\",\r\n    \"password\": \"passABC123#@\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,7 +240,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{imageUrl}}/?pageSize=4&filters={\"description\": \"1\"}",
+							"raw": "{{imageUrl}}/",
 							"host": [
 								"{{imageUrl}}"
 							],
@@ -255,16 +255,23 @@
 								},
 								{
 									"key": "pageSize",
-									"value": "4"
-								},
-								{
-									"key": "filters",
-									"value": "{\"name\": \"ol\"}",
+									"value": "4",
 									"disabled": true
 								},
 								{
 									"key": "filters",
-									"value": "{\"description\": \"1\"}"
+									"value": "{\"name\": \"aa\"}",
+									"disabled": true
+								},
+								{
+									"key": "filters",
+									"value": "{\"description\": \"1\"}",
+									"disabled": true
+								},
+								{
+									"key": "filters",
+									"value": "{\"name\": \"aa\", \"description\": \"1\"}",
+									"disabled": true
 								}
 							]
 						}
@@ -332,16 +339,16 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/D:/WorkSpace/spotify_architecture.jpg"
+									"src": "/D:/images.jpg"
 								},
 								{
 									"key": "name",
-									"value": "old image1",
+									"value": "aaaa",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "this is old image1",
+									"value": "bbbb",
 									"type": "text"
 								}
 							]
@@ -380,7 +387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"imageId\": 14\r\n}",
+							"raw": "{\r\n    \"imageId\": 13\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -420,7 +427,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{detailImageUrl}}/image/?id=14",
+							"raw": "{{detailImageUrl}}/image/?id=16",
 							"host": [
 								"{{detailImageUrl}}"
 							],
@@ -431,7 +438,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "14"
+									"value": "16"
 								}
 							]
 						}
@@ -454,7 +461,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{detailImageUrl}}/save/?id=14",
+							"raw": "{{detailImageUrl}}/save/?id=16",
 							"host": [
 								"{{detailImageUrl}}"
 							],
@@ -465,7 +472,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "14"
+									"value": "16"
 								}
 							]
 						}
@@ -488,7 +495,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{detailImageUrl}}/comments/?id=14",
+							"raw": "{{detailImageUrl}}/comments/?id=16",
 							"host": [
 								"{{detailImageUrl}}"
 							],
@@ -499,7 +506,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "14"
+									"value": "16"
 								}
 							]
 						}
@@ -523,7 +530,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"content\": \"This is comment from PeterSch@example.com again 2\"\r\n}",
+							"raw": "{\r\n    \"content\": \"This new comment from new user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -531,7 +538,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{detailImageUrl}}/comment/?id=14",
+							"raw": "{{detailImageUrl}}/comment/?id=16",
 							"host": [
 								"{{detailImageUrl}}"
 							],
@@ -542,7 +549,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "14"
+									"value": "16"
 								}
 							]
 						}
@@ -582,42 +589,6 @@
 					"response": []
 				},
 				{
-					"name": "update user profile",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{accessToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"fullName\": \"Peter schuz\",\r\n    \"age\": 32\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{userUrl}}/profile",
-							"host": [
-								"{{userUrl}}"
-							],
-							"path": [
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get user posted images",
 					"request": {
 						"auth": {
@@ -633,12 +604,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{userUrl}}/uploads",
+							"raw": "{{userUrl}}/uploads?page=1&pageSize=2",
 							"host": [
 								"{{userUrl}}"
 							],
 							"path": [
 								"uploads"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "filters",
+									"value": "{\"name\": \"aa\"}",
+									"disabled": true
+								},
+								{
+									"key": "filters",
+									"value": "{\"description\": \"1\"}",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -660,12 +651,67 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{userUrl}}/saves",
+							"raw": "{{userUrl}}/saves?page=1&pageSize=2&filters={\"description\": \"1\"}",
 							"host": [
 								"{{userUrl}}"
 							],
 							"path": [
 								"saves"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "filters",
+									"value": "{\"name\": \"aa\"}",
+									"disabled": true
+								},
+								{
+									"key": "filters",
+									"value": "{\"description\": \"1\"}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"Test user 1\",\r\n    \"age\": 18\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{userUrl}}/profile",
+							"host": [
+								"{{userUrl}}"
+							],
+							"path": [
+								"profile"
 							]
 						}
 					},
@@ -698,7 +744,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "11"
+									"value": "17"
 								}
 							]
 						}
@@ -726,7 +772,7 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/D:/Omega-Symbol.jpg"
+									"src": "/D:/images.jpg"
 								}
 							]
 						},
